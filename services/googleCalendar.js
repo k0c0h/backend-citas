@@ -2,6 +2,7 @@ import { google } from "googleapis";
 
 const auth = new google.auth.GoogleAuth({
     credentials: {
+        type: "service_account",
         client_email: process.env.CLIENT_EMAIL,
         private_key: process.env.PRIVATE_KEY.replace(/\\n/g, '\n')
     },
