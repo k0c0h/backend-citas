@@ -14,7 +14,7 @@ const calendar = google.calendar({ version: "v3", auth });
 export async function crearEvento(nombre, email, fecha) {
     const evento = {
         summary: "Cita presencial",
-        description: `Cliente: ${nombre}`,
+        description: `Cliente: ${nombre} - Email: ${email}`,
         start: {
             dateTime: new Date(fecha).toISOString(),
             timeZone: "America/Guayaquil"
@@ -22,8 +22,7 @@ export async function crearEvento(nombre, email, fecha) {
         end: {
             dateTime: new Date(new Date(fecha).getTime() + 60 * 60 * 1000).toISOString(),
             timeZone: "America/Guayaquil"
-        },
-        attendees: [{ email }]
+        }
     };
 
     await calendar.events.insert({
