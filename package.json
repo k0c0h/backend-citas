@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/k0c0h/backend-citas#readme",
   "dependencies": {
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "googleapis": "^133.0.0"
   }
 }
