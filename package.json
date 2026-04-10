@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/k0c0h/backend-citas/issues"
   },
-  "homepage": "https://github.com/k0c0h/backend-citas#readme"
+  "homepage": "https://github.com/k0c0h/backend-citas#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
 }
