@@ -18,14 +18,13 @@ app.post("/crear-cita", async (req, res) => {
             return res.status(400).json({ ok: false, msg: "Faltan datos" });
         }
 
-        // Crear evento en Google Calendar
         await crearEvento(nombre, email, fecha);
 
         res.json({ ok: true });
 
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ ok: false });
+        console.error("🔥 ERROR REAL:", error); // 👈 IMPORTANTE
+        res.status(500).json({ ok: false, error: error.message });
     }
 });
 
