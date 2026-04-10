@@ -12,19 +12,22 @@ app.use(express.json());
 // Endpoint principal
 app.post("/crear-cita", async (req, res) => {
     try {
-        const { nombre, email, fecha } = req.body;
+        const { nombre, email, fecha, hora } = req.body;
 
-        if (!nombre || !email || !fecha) {
+        if (!nombre || !email || !fecha || !hora) {
             return res.status(400).json({ ok: false, msg: "Faltan datos" });
         }
 
-        await crearEvento(nombre, email, fecha);
+        // 🔥 UNIR FECHA + HORA
+        const fechaCompleta = `${fecha}T${hora}:00`;
+
+        await crearEvento(nombre, email, fechaCompleta);
 
         res.json({ ok: true });
 
     } catch (error) {
-        console.error("🔥 ERROR REAL:", error); // 👈 IMPORTANTE
-        res.status(500).json({ ok: false, error: error.message });
+        console.error("🔥 ERROR REAL:", error);
+        res.status(500).json({ ok: false });
     }
 });
 

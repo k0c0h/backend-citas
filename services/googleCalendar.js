@@ -11,30 +11,29 @@ const auth = new google.auth.GoogleAuth({
 
 const calendar = google.calendar({ version: "v3", auth });
 
-export async function crearEvento(nombre, email, fecha, hora) {
+export async function crearEvento(nombre, email, fecha) {
 
-    // 🔥 unir fecha + hora correctamente
-    const fechaCompleta = `${fecha}T${hora}:00`;
+    const fechaObj = new Date(fecha);
+
+    if (isNaN(fechaObj)) {
+        throw new Error("Fecha inválida: " + fecha);
+    }
 
     const evento = {
         summary: "Cita presencial",
         description: `Cliente: ${nombre} - Email: ${email}`,
         start: {
-            dateTime: new Date(fechaCompleta).toISOString(),
+            dateTime: fechaObj.toISOString(),
             timeZone: "America/Guayaquil"
         },
         end: {
-            dateTime: new Date(new Date(fechaCompleta).getTime() + 60 * 60 * 1000).toISOString(),
+            dateTime: new Date(fechaObj.getTime() + 60 * 60 * 1000).toISOString(),
             timeZone: "America/Guayaquil"
         }
     };
 
-    const response = await calendar.events.insert({
-        calendarId: "chiribogakerly@gmail.com", // tu calendario
+    await calendar.events.insert({
+        calendarId: "chiribogakerly@gmail.com",
         resource: evento
     });
-
-    console.log("✅ EVENTO CREADO:", response.data.htmlLink);
-
-    return response.data;
 }
