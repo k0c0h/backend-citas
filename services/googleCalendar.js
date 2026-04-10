@@ -26,7 +26,7 @@ export async function crearEvento(nombre, email, fecha) {
     };
 
     await calendar.events.insert({
-        calendarId: "primary",
+        calendarId: "chiribogakerly@gmail.com",
         resource: evento
     });
 }
